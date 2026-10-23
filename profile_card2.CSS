@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding: 0;
+    /* Dark purplish-black background */
+    background-color: #0b0f19; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+.card{
+    position: relative;
+    border-radius: 24px;
+    /* Ye 3px padding hi card ke chaaro taraf ek patli line banayegi */
+    padding: 3px; 
+    background: linear-gradient(135deg, #0075ff, #ff007f);
+    z-index: 1;
+}

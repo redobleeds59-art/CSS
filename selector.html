@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .margin{
+        margin : 10px 0px;
+        font-weight: 46;
+    }
+    .but{
+       background-color: rgb(226, 230, 230);
+       margin: 10px;
+       padding: 4px;
+    }
+    .ijk{
+        background-color: #f1f1f1;
+        padding: 13px;
+        border-left-style: solid;
+        border-left-color:rgb(45, 231, 45) ;
+        border-width:5px ;
+    }
+    .butt{
+        margin: 10px;
+        padding: 10px;
+        background-color: rgb(12, 131, 12);
+        color: #f1f1f1;
+        border-radius: 5px;
+    }
+
+    </style>
+</head>
+<body>
+ <header><h1 class="margin"> CSS Selectors </h1> </header>
+ <button">HOME</button>
+ <p>CSS selectors are used to "find" (or select) the HTML elements you want to style.</p>
+ <nav>
+    <p>We can divide CSS selectors into five categories:</p>
+    <ul>
+        <li><a href="https://www.w3schools.com/css/css_combinators.asp">Combinator selectors</a> (select elements based on a specific relationship between them)</li>
+        <li><a href="https://www.w3schools.com/css/css_pseudo_classes.asp">Pseudo class selectors</a> (select elements based on a certain state)</li>
+        <li><a href="https://www.w3schools.com/css/css_pseudo_elements.asp">Pseudo elements selectors</a> (select and style a part of an element)</li>
+        <li><a href="https://www.w3schools.com/css/css_attribute_selectors.asp">Attribute selectors</a>  (select elements based on an attribute or attribute value)</li>
+    </ul>  
+ </nav>
+  <p>These page will explain most basic <abbr title=" Cascading Style Sheets">CSS</abbr> selectors.</p>
+  <main>
+    <section>
+        <h1>The CSS element selector</h1>
+        <p>The element selector selects HTML elements based on the element name.
+           <!-- Example Section ka Main Dabba -->
+<div class="but">  
+    <h2>Example</h2>
+    <p>Here, all &lt;p&gt; elements on the page will be center-aligned, with a red text color:</p>
+    
+    <!-- Code Snippet wala Dabba -->
+    <div class="ijk">
+        p {<br>
+        &nbsp;&nbsp;text-align: center;<br>
+        &nbsp;&nbsp;color: red;<br>
+        }
+    </div>
+
+    <!-- Naye tab mein khulne wala Button -->
+    <a href="https://www.w3schools.com/css/tryit.asp?filename=trycss_syntax_element" target="_blank">
+        <button class="butt">Try it Yourself »</button>
+    </a>
+</div>    
+    </section>
+
+    <section>
+        <h1>The CSS id Selector</h1>
+        <!-- Har sentence ke liye alag paragraph -->
+<p>The <span style="color: crimson; background-color: #f1f1f1; padding: 2px 5px; border-radius: 3px; font-family: monospace;">id</span> selector uses the id attribute of an HTML element to select a specific element.</p>
+
+<p>The id of an element is unique within a page, so the id selector is used to select one unique element!</p>
+
+<p>To select an element with a specific id, write a hash (#) character, followed by the id of the element.</p>
+
+<div>
+    <h2>Example</h2>
+    <p>The CSS rule below will be applied to the HTML element with id="para1": </p>
+    <div>
+        #para1{<br>
+            &nbsp;&nbsp;text-align:center<br>
+            &nbsp;&nbsp;color :red;<br>
+        }
+
+       
+    </div>
+     <a href="https://www.w3schools.com/css/tryit.asp?filename=trycss_syntax_id" target="_blank"><button>Try it Yourself »</button></a>
+</div>
+
+<div class="note-box">
+    <strong>Note:</strong> The id of an element is unique within a page, so the id selector is used to select one unique element!
+</div>
+    </section>
+    <aside class="ad-banner" style="text-align: center; margin: 40px 0;">
+    <img src="https://via.placeholder.com/800x250?text=Your+Notes+Now+Videos" alt="Gemini Ad" width="100%">
+    <p style="font-size: 12px; color: grey;">REMOVE ADS</p>
+</aside>
+    <section>
+        <h1>The CSS class Selector</h1>
+        <p>The class selector selects HTML elements with a specific class attribute.</p>
+        <p>To select elements with a specific class, write a period (.) character, followed by the class name.</p>
+        <div>
+            <h2>Example</h2>
+            <p>In this example all HTML elements with class="center" will be red and center-aligned: </p>
+            <div>
+                .center{<br>
+                    &nbsp;&nbsp;text-align:center;<br>
+                    &nbsp;&nbsp;color:red;<br>
+                }
+            </div>
+            <a href="https://www.w3schools.com/css/tryit.asp?filename=trycss_syntax_class" target="_blank"><button>Try it Yourself »</button></a>
+        </div>
+    </section>
+    <!-- Exercise Section (Main ke andar sabse last mein) -->
+<section class="exercise-box" style="background-color: #282A35; color: white; padding: 30px; border-radius: 5px; text-align: center; margin-top: 40px;">
+    
+    <h2>Exercise</h2>
+    <p>Which CSS selector is used to select an element with a specific id?</p>
+
+    <!-- Form start -->
+    <form action="#">
+        
+        <!-- Option 1 -->
+        <div class="radio-option" style="background-color: #383B4C; padding: 10px; margin: 5px auto; width: 50%; text-align: left; border-radius: 4px;">
+            <input type="radio" id="opt1" name="css_id_quiz" value="*">
+            <label for="opt1">*</label>
+        </div>
+
+        <!-- Option 2 -->
+        <div class="radio-option" style="background-color: #383B4C; padding: 10px; margin: 5px auto; width: 50%; text-align: left; border-radius: 4px;">
+            <input type="radio" id="opt2" name="css_id_quiz" value=".">
+            <label for="opt2">.</label>
+        </div>
+
+        <!-- Option 3 -->
+        <div class="radio-option" style="background-color: #383B4C; padding: 10px; margin: 5px auto; width: 50%; text-align: left; border-radius: 4px;">
+            <input type="radio" id="opt3" name="css_id_quiz" value="#">
+            <label for="opt3">#</label>
+        </div>
+
+        <!-- Option 4 -->
+        <div class="radio-option" style="background-color: #383B4C; padding: 10px; margin: 5px auto; width: 50%; text-align: left; border-radius: 4px;">
+            <input type="radio" id="opt4" name="css_id_quiz" value="%">
+            <label for="opt4">%</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="button" style="background-color: #04AA6D; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; font-size: 16px;">
+            Submit Answer »
+        </button>
+
+    </form>
+</section>
+  </main>
+
+</body>
+</html>

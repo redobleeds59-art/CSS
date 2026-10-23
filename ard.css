@@ -1,0 +1,86 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.BOX{
+    position: relative;
+    top: 40px;
+    left: 40px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    height: 420px;
+    width: 380px;
+} 
+
+.card-img{
+    height: 200px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 8px;
+}
+.card-text{
+    position: absolute;
+    top: 215px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.card-price {
+  position: absolute;
+  top: 250px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  font-size: 16px;
+  color: #64748b;
+}
+
+.BOX1{
+    position: absolute;
+    top: 3px;
+    width: 100%;
+    text-align: center;
+    color: darkgray;
+    font-size: 19px;
+    
+}
+
+.box-price{
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    text-align: center;
+    color: grey;
+    font-size: 18px;
+}
+
+.BOX2{
+   position: absolute;
+   top: 65px;
+   width: 210px;
+   height: 35px;
+   left: 75px;
+   border: 1px white;
+   border-radius: 5px;
+   background-color: rgb(34, 34, 170);
+   color: #eef2ff;
+   cursor: pointer;
+}
+
+.B {
+    position: absolute;
+    bottom: 15px;
+    left: 15px; /* .BOX ke size ke hisaab se center karne ke liye adjust kar lena */
+    width: 350px; 
+    height: 120px;
+    background-color: #eef2ff;
+    border-radius: 10px;
+}
+
+.BOX2:hover {
+ background-color: rgb(43, 183, 226);
+}

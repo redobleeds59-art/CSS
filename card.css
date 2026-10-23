@@ -1,0 +1,56 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.BOX{
+    display: flex;
+    border: 2px solid gray;
+    border-radius: 7px;
+    margin: 10px;
+    padding: 4px;
+    flex-direction: column;
+    align-items: center;
+    width: 340px;
+    box-sizing: border-box;
+    gap: 10px;
+
+}
+.card-img{
+  height: 200px;
+  width: 100%;
+  border-radius:5px;
+}
+
+.card-price{
+    color: grey;
+}
+
+.B{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    color: grey;
+    background-color: aquamarine;
+    padding: 15px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1px;
+    margin-top: auto;
+    box-sizing: border-box;
+}
+
+.BOX2{
+    height: 35px;
+    width: 200px;
+    border-radius: 5px;
+    background-color: blue;
+    color: aliceblue;
+}
+
+.BOX2:hover{
+    background-color: darkblue;
+    cursor: pointer;
+}
+

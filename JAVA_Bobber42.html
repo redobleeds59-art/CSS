@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>JAWA_BOBBER_42</title>
+    <style>
+        *{
+            background-color: #010e19;
+            color:  #d1d1d1;
+        }
+
+        header span, header i {
+        font-size: 30px;
+        
+        margin-right: 7px;
+    }
+
+   /* 1. Main Search Container */
+.search-container {
+    /* Dono ko ek line mein laane ke liye inline-block best hai */
+    display: inline-block; 
+    
+    /* Background color jo thoda sa light dark-blue hai (#0a141e ya #111a24 try karo) */
+    background-color: #111a24; 
+    
+    /* Rounded borders banane ke liye sabse important property! */
+    border-radius: 25px;       
+    
+    /* Box ke bahar ek halki si border line dene ke liye */
+    border: 1px solid #334257; 
+    
+    /* Thoda padding taaki box bada aur saaf dikhe */
+    padding: 5px 15px;         
+}
+
+/* 2. Text Input Field */
+.search-input {
+    /* Input ka apna background hata kar transparent (paradarshi) kar do */
+    background-color: transparent; 
+    
+    /* Default border hata do (kyunki humne container ko border de di hai) */
+    border: none;              
+    
+    /* Text ka color white rakho */
+    color: white;              
+    
+    /* Click karne (focus) par jo extra border aati hai, use bhi hata do */
+    outline: none;             
+    
+    /* Box ki chaudai (width) set karo */
+    width: 250px;              
+}
+
+/* 3. Search Icon Button */
+.search-btn {
+    background-color:transparent; /* Button ka background hatao */
+    border: none;                  /* Button ki border hatao */
+    color: #a0aab5;                /* Icon ka color thoda greyish-white rakho */
+    cursor: pointer;               /* Hover karne par hand icon aaye */
+}
+
+.l{
+    float:right;
+}
+
+    </style>
+
+</head>
+<body>
+<header>
+    <div>
+<span class="material-symbols-outlined">menu</span>
+<i class="fa-solid fa-motorcycle"> BIKERS</i>
+    </div>
+    <div class="l">
+      <form class="search-container" action="/search">
+  <input type="text" class="search-input" placeholder="Search">
+  <button type="submit" class="search-btn">
+    <i class="fa-solid fa-magnifying-glass"></i> <!-- Search Icon -->
+  </button>
+     </form>
+    </div>
+    
+
+</header>
+</body>
+</html>

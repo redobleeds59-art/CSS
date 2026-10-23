@@ -1,0 +1,105 @@
+/* Background aur card ko center karne ke liye */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #e5e7eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Main Card Container */
+.card {
+    background-color: #f8f9fa; /* Niche ka light grey color */
+    width: 340px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative; /* Image ko iske reference mein set karne ke liye */
+}
+
+/* Conic Gradient Header */
+.card-header {
+    height: 180px;
+    /* Ye raha wo wheel wala color effect */
+    background: conic-gradient(
+        from 0deg at 50% 50%, 
+        #7c3aed, /* Purple */
+        #ef4444, /* Red */
+        #eab308, /* Yellow */
+        #3b82f6, /* Blue */
+        #10b981, /* Green */
+        #f97316, /* Orange */
+        #7c3aed  /* Wapas Purple */
+    );
+}
+
+/* Circular Profile Image */
+.profile-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    /* Image ko overlap karne ke liye Position ka use */
+    position: absolute;
+    top: 100px; /* Header aur body ke beech set karne ke liye */
+    left: 50%;
+    transform: translateX(-50%); /* Left 50% karke wapas center mein lana */
+}
+
+/* Content Area */
+.card-body {
+    padding: 0 30px 30px 30px; /* Sides aur bottom mein space */
+    margin-top: 60px; /* Image ke niche ki jagah cover karne ke liye */
+    text-align: center;
+}
+
+/* Typography settings */
+.name {
+    margin: 0;
+    font-size: 26px;
+    font-weight: bold;
+    color: #000;
+}
+
+.title {
+    margin: 5px 0 20px 0;
+    font-size: 15px;
+    color: #333;
+}
+
+/* Social Icons Section (Flexbox) */
+.social-icons {
+    display: flex;
+    justify-content: center; /* Ekdum center mein icons */
+    gap: 15px; /* Har icon ke beech ka gap */
+    margin-bottom: 25px;
+}
+
+.social-icons a {
+    background-color: #000; /* Black circle */
+    color: #fff; /* White icon */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; /* Circle shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: transform 0.2s;
+}
+
+/* Hover effect on icons */
+.social-icons a:hover {
+    transform: scale(1.1); /* Hover karne pe thoda bada hoga */
+}
+
+/* Bio Text */
+.bio {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+}

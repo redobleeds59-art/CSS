@@ -1,0 +1,18 @@
+.cards{
+    margin: auto;
+    padding: auto;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.card-img{
+    
+    width: 200px;
+    float: right;
+    
+}
+.card-img1{
+    width: 200px;
+    float: left;
+  
+}

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Transform Visualizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Strict Black & White Theme / Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #171717; }
+        ::-webkit-scrollbar-thumb { background: #525252; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #737373; }
+        
+        .resetting { transition: transform 0.3s ease-out; }
+
+        /* Monochrome Range Inputs */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #000000;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #404040;
+            border-radius: 2px;
+        }
+        input[type=range]:focus { outline: none; }
+        
+        /* 3D Grid background for the scene */
+        .scene-bg {
+            background-image: 
+                linear-gradient(to right, #222 1px, transparent 1px),
+                linear-gradient(to bottom, #222 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        /* Target Box 3D adjustments */
+        #targetBox {
+            background: repeating-linear-gradient(45deg, #000, #000 10px, #222 10px, #222 20px);
+            transform-style: preserve-3d;
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen font-sans selection:bg-white selection:text-black">
+
+    <div class="max-w-[1400px] mx-auto px-4 py-8 h-full flex flex-col md:h-screen">
+        
+        <!-- Header -->
+        <header class="text-center mb-6 border-b border-neutral-800 pb-4 flex-shrink-0">
+            <h1 class="text-3xl md:text-4xl font-black tracking-wider uppercase mb-1">
+                CSS 3D Visualizer
+            </h1>
+            <p class="text-neutral-400 text-sm tracking-widest uppercase">Monochrome Edition - Fixed</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="flex flex-col lg:flex-row gap-6 flex-grow pb-4 min-h-0">
+            
+            <!-- Left: Playground Area & Code -->
+            <div class="flex-grow flex flex-col gap-6">
+                <!-- 3D Stage -->
+                <div class="flex-grow bg-neutral-950 rounded-lg border border-neutral-800 flex flex-col relative overflow-hidden shadow-2xl scene-bg min-h-[300px]">
+                    <!-- Perspective Container (The Camera) -->
+                    <div id="sceneContainer" class="relative z-10 flex-grow flex items-center justify-center w-full h-full" style="perspective: 800px;">
+                        <!-- The Target Box -->
+                        <div id="targetBox" class="w-32 h-32 md:w-48 md:h-48 border-2 border-white flex flex-col items-center justify-center text-white will-change-transform z-20 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                            <span class="font-bold text-xl md:text-2xl uppercase tracking-widest bg-black px-2 py-1 border border-neutral-700">Target</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generated CSS Code Block -->
+                <div class="w-full bg-neutral-900 border border-neutral-700 rounded-lg p-4 flex items-start justify-between shadow-inner flex-shrink-0">
+                    <pre id="cssOutput" class="text-xs md:text-sm font-mono text-neutral-300 whitespace-pre-wrap flex-grow"></pre>
+                    <button onclick="copyCode()" class="ml-4 p-2 bg-black hover:bg-neutral-800 text-white rounded border border-neutral-600 transition-colors focus:ring-1 focus:ring-white outline-none flex-shrink-0" title="Copy to Clipboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Controls Panel -->
+            <div class="w-full lg:w-[400px] bg-neutral-900 rounded-lg border border-neutral-800 p-6 flex flex-col flex-shrink-0">
+                <div class="flex items-center justify-between border-b border-neutral-700 pb-4 mb-4">
+                    <h2 class="text-lg font-bold uppercase tracking-widest">Controls</h2>
+                    <button onclick="resetTransforms()" class="px-3 py-1 bg-transparent hover:bg-white hover:text-black text-white border border-white rounded text-xs font-bold uppercase tracking-wider transition-colors">
+                        Reset All
+                    </button>
+                </div>
+
+                <div class="overflow-y-auto pr-4 space-y-6 flex-grow" style="max-height: calc(100vh - 200px);">
+                    
+                    <!-- Perspective -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <label class="text-xs font-bold uppercase text-neutral-400">Perspective</label>
+                            <span id="perspectiveVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-20 text-right">800px</span>
+                        </div>
+                        <input type="range" id="perspective" class="transform-control" min="100" max="2000" value="800">
+                    </div>
+
+                    <div class="border-t border-neutral-800"></div>
+
+                    <!-- Translate 3D -->
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-bold text-white uppercase tracking-wider">Translate 3D</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">X-Axis</label>
+                                <span id="txVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">0px</span>
+                            </div>
+                            <input type="range" id="tx" class="transform-control" min="-300" max="300" value="0">
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">Y-Axis</label>
+                                <span id="tyVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">0px</span>
+                            </div>
+                            <input type="range" id="ty" class="transform-control" min="-300" max="300" value="0">
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">Z-Axis</label>
+                                <span id="tzVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">0px</span>
+                            </div>
+                            <input type="range" id="tz" class="transform-control" min="-500" max="500" value="0">
+                        </div>
+                    </div>
+
+                    <div class="border-t border-neutral-800"></div>
+
+                    <!-- Scale 3D -->
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-bold text-white uppercase tracking-wider">Scale 3D</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">X-Axis</label>
+                                <span id="scaleXVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">1</span>
+                            </div>
+                            <input type="range" id="scaleX" class="transform-control" min="0.1" max="3" step="0.1" value="1">
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">Y-Axis</label>
+                                <span id="scaleYVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">1</span>
+                            </div>
+                            <input type="range" id="scaleY" class="transform-control" min="0.1" max="3" step="0.1" value="1">
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">Z-Axis</label>
+                                <span id="scaleZVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">1</span>
+                            </div>
+                            <input type="range" id="scaleZ" class="transform-control" min="0.1" max="3" step="0.1" value="1">
+                        </div>
+                    </div>
+
+                    <div class="border-t border-neutral-800"></div>
+
+                    <!-- Rotate 3D -->
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-bold text-white uppercase tracking-wider">Rotate 3D</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">X-Axis</label>
+                                <span id="rxVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">0deg</span>
+                            </div>
+                            <input type="range" id="rx" class="transform-control" min="-360" max="360" value="0">
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">Y-Axis</label>
+                                <span id="ryVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">0deg</span>
+                            </div>
+                            <input type="range" id="ry" class="transform-control" min="-360" max="360" value="0">
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">Z-Axis</label>
+                                <span id="rzVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">0deg</span>
+                            </div>
+                            <input type="range" id="rz" class="transform-control" min="-360" max="360" value="0">
+                        </div>
+                    </div>
+
+                    <div class="border-t border-neutral-800"></div>
+
+                    <!-- Skew 2D -->
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-bold text-white uppercase tracking-wider">Skew 2D (No Z-Axis)</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">X-Axis</label>
+                                <span id="skewXVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">0deg</span>
+                            </div>
+                            <input type="range" id="skewX" class="transform-control" min="-90" max="90" value="0">
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs text-neutral-400">Y-Axis</label>
+                                <span id="skewYVal" class="text-xs font-mono bg-black px-2 py-1 rounded border border-neutral-700 w-16 text-right">0deg</span>
+                            </div>
+                            <input type="range" id="skewY" class="transform-control" min="-90" max="90" value="0">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 transform translate-y-20 opacity-0 transition-all duration-300 bg-white text-black font-bold uppercase tracking-wide text-sm px-6 py-3 rounded shadow-2xl flex items-center gap-2 z-50 border border-neutral-300 pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        Code Copied
+    </div>
+
+    <script>
+        // DOM Elements
+        const sceneContainer = document.getElementById('sceneContainer');
+        const targetBox = document.getElementById('targetBox');
+        const cssOutput = document.getElementById('cssOutput');
+        const controls = document.querySelectorAll('.transform-control');
+        const toast = document.getElementById('toast');
+
+        // Inputs
+        const inputs = {
+            perspective: document.getElementById('perspective'),
+            tx: document.getElementById('tx'),
+            ty: document.getElementById('ty'),
+            tz: document.getElementById('tz'),
+            rx: document.getElementById('rx'),
+            ry: document.getElementById('ry'),
+            rz: document.getElementById('rz'),
+            scaleX: document.getElementById('scaleX'),
+            scaleY: document.getElementById('scaleY'),
+            scaleZ: document.getElementById('scaleZ'),
+            skewX: document.getElementById('skewX'),
+            skewY: document.getElementById('skewY')
+        };
+
+        // Value Displays
+        const displays = {
+            perspective: document.getElementById('perspectiveVal'),
+            tx: document.getElementById('txVal'),
+            ty: document.getElementById('tyVal'),
+            tz: document.getElementById('tzVal'),
+            rx: document.getElementById('rxVal'),
+            ry: document.getElementById('ryVal'),
+            rz: document.getElementById('rzVal'),
+            scaleX: document.getElementById('scaleXVal'),
+            scaleY: document.getElementById('scaleYVal'),
+            scaleZ: document.getElementById('scaleZVal'),
+            skewX: document.getElementById('skewXVal'),
+            skewY: document.getElementById('skewYVal')
+        };
+
+        // Main Update Function
+        function updateTransform() {
+            // Get current values
+            const vals = {
+                p: inputs.perspective.value,
+                tx: inputs.tx.value,
+                ty: inputs.ty.value,
+                tz: inputs.tz.value,
+                rx: inputs.rx.value,
+                ry: inputs.ry.value,
+                rz: inputs.rz.value,
+                sx: inputs.scaleX.value,
+                sy: inputs.scaleY.value,
+                sz: inputs.scaleZ.value,
+                skX: inputs.skewX.value,
+                skY: inputs.skewY.value
+            };
+
+            // Update UI Labels
+            displays.perspective.textContent = `${vals.p}px`;
+            displays.tx.textContent = `${vals.tx}px`;
+            displays.ty.textContent = `${vals.ty}px`;
+            displays.tz.textContent = `${vals.tz}px`;
+            displays.rx.textContent = `${vals.rx}deg`;
+            displays.ry.textContent = `${vals.ry}deg`;
+            displays.rz.textContent = `${vals.rz}deg`;
+            displays.scaleX.textContent = vals.sx;
+            displays.scaleY.textContent = vals.sy;
+            displays.scaleZ.textContent = vals.sz;
+            displays.skewX.textContent = `${vals.skX}deg`;
+            displays.skewY.textContent = `${vals.skY}deg`;
+
+            // Apply Perspective to the parent container
+            sceneContainer.style.perspective = `${vals.p}px`;
+
+            // Construct 3D Transform String
+            const transformString = `translate3d(${vals.tx}px, ${vals.ty}px, ${vals.tz}px) rotateX(${vals.rx}deg) rotateY(${vals.ry}deg) rotateZ(${vals.rz}deg) scale3d(${vals.sx}, ${vals.sy}, ${vals.sz}) skew(${vals.skX}deg, ${vals.skY}deg)`;
+            
+            // Apply to Box
+            targetBox.style.transform = transformString;
+
+            // Update Code Output
+            const codeTemplate = `.parent-container {
+    perspective: ${vals.p}px;
+}
+
+.box {
+    transform: ${transformString};
+    transform-style: preserve-3d;
+}`;
+            cssOutput.textContent = codeTemplate;
+        }
+
+        // Event Listeners
+        controls.forEach(control => {
+            control.addEventListener('input', () => {
+                targetBox.classList.remove('resetting');
+                updateTransform();
+            });
+        });
+
+        // Reset Function
+        function resetTransforms() {
+            targetBox.classList.add('resetting');
+
+            // Reset inputs to defaults
+            inputs.perspective.value = 800;
+            inputs.tx.value = 0;
+            inputs.ty.value = 0;
+            inputs.tz.value = 0;
+            inputs.rx.value = 0;
+            inputs.ry.value = 0;
+            inputs.rz.value = 0;
+            inputs.scaleX.value = 1;
+            inputs.scaleY.value = 1;
+            inputs.scaleZ.value = 1;
+            inputs.skewX.value = 0;
+            inputs.skewY.value = 0;
+
+            updateTransform();
+
+            setTimeout(() => {
+                targetBox.classList.remove('resetting');
+            }, 300);
+        }
+
+        // Copy logic
+        function copyCode() {
+            const textToCopy = cssOutput.textContent.trim();
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = textToCopy;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast();
+                } catch (error) {
+                    console.error('Failed to copy text', error);
+                }
+                textArea.remove();
+            }
+        }
+
+        function showToast() {
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        // INITIALIZE IMMEDIATELY ON LOAD
+        updateTransform();
+
+    </script>
+</body>
+</html>

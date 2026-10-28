@@ -3,69 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Myntra Clone</title>
-
-    <style>
-        * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-  header {
-      background-color: #ffffff;
-      padding: 12px 30px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-
-    .logo {
-      display: inline-block;
-      vertical-align: middle;
-      color: #ff3f6c;
-      font-size: 24px;
-      font-weight: bold;
-      text-decoration: none;
-      margin-right: 35px;
-    }
-    
-    </style>
+     <link rel="stylesheet" href="myntra.css">
+     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <strong class="logo">Myntra</strong>
+    <header class="BOX1">
+        <strong ><img src="https://logos-world.net/wp-content/uploads/2021/02/New-Myntra-Logo.png" alt="myntra logo" class="logo"></strong>
         <nav>
-            <ul>
-            <li><a href="#">MEN</a></li>
-            <li><a href="#">WOMEN</a></li>
-            <li><a href="#">KIDS</a></li>
-            <li><a href="#">BEAUTY</a></li>
-            <li><a href="#">GENZ</a></li>
-            <li><a href="#">STUDIO <sup>NEW</sup></a></li>
+            <ul class="BOX2">
+            <li>MEN</li>
+            <li>WOMEN</li>
+            <li>KIDS</li>
+            <li>HOME</li>
+            <li>BEAUTY</li>
+            <li>GENZ</li>
+            <li>STUDIO <sup style="color: rgb(236, 33, 67);">NEW</sup></li>
         </ul>
         </nav>
-
-     <form action="#" method="get">
+      <div class="search-bar">
+        <i class="fas fa-search search-icon"></i>
+    
       <input 
         type="search" 
         name="query" 
         placeholder="Search for products, brands and more" 
       />
-    </form>
+   
+  </div>
 
-    <div>
-      <a href="#">Profile</a>
-      <a href="#">Wishlist</a>
-      <a href="#">Bag</a>
-      <i class="fas fa-heart"></i>
-    </div>
-    <i class="material-icons">cloud</i>
-<i class="material-icons">favorite</i>
-<i class="material-icons">attachment</i>
-<i class="material-icons">computer</i>
-<i class="material-icons">traffic</i>
-
+    <div class="action-icons">
+            <div class="icon-box">
+                <i class="far fa-user"></i>
+                <span>Profile</span>
+            </div>
+            <div class="icon-box">
+                <i class="far fa-heart"></i>
+                <span>Wishlist</span>
+            </div>
+            <div class="icon-box">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Bag</span>
+            </div>
+        </div>
     </header>
 </body>
 </html>

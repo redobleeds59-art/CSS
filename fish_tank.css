@@ -1,0 +1,108 @@
+.tank{
+    height: 60vh;
+    width: 60vw;
+    background-color: aqua;
+    border: 4px solid grey;
+    position: relative;
+    overflow: hidden; 
+}
+
+
+.tan{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.grass-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-evenly; 
+}
+
+
+.grass1 {
+  font-size: 60px;
+
+  transform-origin: bottom center; 
+ 
+  animation: swayPlants 2.5s infinite alternate ease-in-out;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -30px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+}
+
+.bubble1 {
+  width: 20px;
+  height: 20px;
+  left: 30%;
+  animation: floatUp 4s infinite ease-in;
+}
+
+.bubble2 {
+  width: 35px;
+  height: 35px;
+  left: 70%;
+  animation: floatUp 6s infinite ease-in;
+}
+
+@keyframes swayPlants {
+  0% {
+    transform: rotate(-10deg); 
+  }
+  100% {
+    transform: rotate(10deg); 
+  }
+}
+
+
+.fish1 {
+  font-size: 50px;
+  position: absolute;
+  top: 30%;
+  left: -80px;
+  animation: swimRight 10s infinite linear;
+}
+
+.fish2 {
+  font-size: 54px;
+  position: absolute; 
+  top: 50%;
+  right: -80px; 
+  animation: swimLeft 12s infinite linear;
+}
+
+.fish3 {
+  position: absolute;
+  font-size: 52px;
+  top: 70%;
+  left: -80px;
+  animation: swimRight 14s infinite linear;
+}
+
+
+@keyframes swimRight {
+  0% { transform: translateX(0) scaleX(-1); }
+  100% { transform: translateX(70vw) scaleX(-1); }
+}
+
+
+@keyframes swimLeft {
+  0% { transform: translateX(0) scaleX(1); }
+  100% { transform: translateX(-70vw) scaleX(1); }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-60vh); opacity: 0; }
+}

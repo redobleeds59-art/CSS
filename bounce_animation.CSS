@@ -1,0 +1,37 @@
+.board{
+    height: 80vh;
+    width: 80vw;
+    background-color: blue;
+    position: relative;
+}
+
+.boll{
+    height: 90px;
+    width: 90px;
+    background-color: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left:0;
+
+    animation-name: bounce;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateX(0) translateY(0); /* Zameen par start */
+  }
+  50% {
+    transform: translateX(250px) translateY(calc(-80vh + 90px)); /* Hawa mein sabse upar */
+  }
+  100% {
+    transform: translateX(500px) translateY(0); /* Aage jaakar wapas zameen par */
+  }
+}

@@ -1,0 +1,148 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+.main {
+    height: 115vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)), url(https://assets.nflxext.com/ffe/siteui/vlv3/29195c81-5ebb-453e-82e9-d3a50737dfb3/web/IN-en-20261026-TRIFECTA-perspective_ef561213-292c-4768-aef0-c1db800e385e_large.jpg);
+    background-size: cover;
+    background-position: top;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.logo{
+    width: 150px;
+}
+
+.abc{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 25px 10%;
+}
+.buttonv{
+    display: flex;
+    gap: 10px ;
+}
+
+.sym{
+   filter: invert(100%);
+   height: 17px;
+ }
+.lang-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid snow;
+    border-radius: 4px;
+    color: aliceblue;
+    height: 30px;
+    font-size: 15px;
+    font-weight: 700;
+    gap: 5px;
+}
+
+.signin_btn{
+    background-color: rgb(250, 35, 35);
+    border: none;
+    border-radius: 4px;
+    color: aliceblue;
+    font-weight: 700;
+    width: 70px;
+}
+
+.txt-content {
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    flex-grow: 1; 
+    gap: 15px;
+    margin-bottom: 50px; 
+    font-family: sans-serif;
+}
+.txt-content h1{
+    font-weight: 700;
+    font-size: 55px;
+}
+
+.txt-content h1, 
+.txt-content h3, 
+.txt-content p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.button1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px
+    ;
+}
+
+.button1 input {
+    padding: 15px 20px; /* Andar se bada karne ke liye */
+    width: 350px; /* Input box ki lambai */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* White border */
+    border-radius: 4px; 
+    font-size: 1rem;
+
+}
+
+.button1 button  {
+    padding: 15px 25px; /* Input ke barabar height dene ke liye padding badao */
+    background-color: rgb(229, 9, 20); /* Netflix red color */
+    color: white;
+    border: none;
+    border-radius: 4px; /* Corners ko gol karne ke liye */
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.curve-divider h2{
+    position: absolute;
+    bottom: 0;
+    display: block;
+   color: aliceblue;
+   font-family: sans-serif;
+   margin: 10px;
+   margin-left: 250px;
+   
+   padding: 0;
+}
+.curve-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: radial-gradient(50% 500% at 50% -420%, rgba(64, 97, 231, 0.4) 80%, rgba(0, 0, 0, 0.1) 100%), black; /* Original Netflix ka background */
+  border-top-left-radius: 50% 100%;
+  border-top-right-radius: 50% 100%;
+  z-index: 1; /* Taki content ke piche na chhupe */
+}
+
+/* Original Netflix jaisi subtle glowing line */
+.curve-divider::before {
+  content: "";
+  position: absolute;
+  top: 0; /* Ya phir koi choti value de sakte ho, jaisa 2px */
+  left: 0;
+  width: 100%;
+  height: 100%; /* Line thickness ke lie adjust karo */
+  border-top-left-radius: inherit; /* inherit karke curve wahi rahega */
+  border-top-right-radius: inherit; 
+  /* Tumhara exact Netflix wala linear-gradient */
+  background: linear-gradient(to right, rgba(33, 13, 22, 1) 16%, rgba(184, 40, 105, 1), rgba(229, 9, 20, 1), rgba(184, 40, 105, 1), rgba(33, 13, 22, 1) 84%);
+  z-index: -1;
+}
